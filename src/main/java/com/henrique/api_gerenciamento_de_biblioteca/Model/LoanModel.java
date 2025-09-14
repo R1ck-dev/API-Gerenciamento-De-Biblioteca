@@ -30,7 +30,7 @@ public class LoanModel {
     private LocalDate loanDate;
 
     @Column
-    private LocalDate dueTime;
+    private LocalDate dueDate;
 
     @Column
     private LocalDate returnDate;
@@ -70,12 +70,12 @@ public class LoanModel {
         this.loanDate = loanDate;
     }
 
-    public LocalDate getDueTime() {
-        return dueTime;
+    public LocalDate getDueDate() {
+        return dueDate;
     }
 
-    public void setDueTime(LocalDate dueTime) {
-        this.dueTime = dueTime;
+    public void setDueDate(LocalDate dueDate) {
+        this.dueDate = dueDate;
     }
 
     public LocalDate getReturnDate() {

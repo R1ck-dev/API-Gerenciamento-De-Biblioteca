@@ -2,6 +2,8 @@ package com.henrique.api_gerenciamento_de_biblioteca.Model;
 
 import java.util.List;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -20,8 +22,8 @@ public class AuthorModel {
     @Column
     private String name;
 
-    @Column
-    @ManyToMany(mappedBy = "author")
+    @ManyToMany(mappedBy = "authors")
+    @JsonIgnore
     private List<BookModel> books;
 
     public AuthorModel() {

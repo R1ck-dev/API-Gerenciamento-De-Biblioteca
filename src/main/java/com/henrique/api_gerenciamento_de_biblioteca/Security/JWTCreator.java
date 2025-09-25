@@ -20,7 +20,6 @@ public class JWTCreator {
     public static final String ROLES_AUTHORITIES = "authorities";
 
     public static String create(String prefix, String key, JWTObject jwtObject) {
-        // 1. Criar uma chave SecretKey segura a partir da sua String
         SecretKey secretKey = Keys.hmacShaKeyFor(key.getBytes(StandardCharsets.UTF_8));
 
         String token = Jwts.builder()
@@ -36,13 +35,10 @@ public class JWTCreator {
     public static JWTObject create(String token, String prefix, String key)
             throws ExpiredJwtException, UnsupportedJwtException, MalformedJwtException, SignatureException {
 
-        // 2. Criar a mesma SecretKey para verificação
         SecretKey secretKey = Keys.hmacShaKeyFor(key.getBytes(StandardCharsets.UTF_8));
 
-        // 3. Remover o prefixo do token
         token = token.replace(prefix + " ", ""); // Corrigido para remover o espaço também
 
-        // 4. Construir o parser com a chave e usá-lo para validar o token
         JwtParser parser = Jwts.parser().verifyWith(secretKey).build();
         Claims claims = parser.parseSignedClaims(token).getPayload();
 

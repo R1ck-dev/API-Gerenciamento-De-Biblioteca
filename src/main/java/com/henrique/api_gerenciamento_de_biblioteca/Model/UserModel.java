@@ -83,7 +83,9 @@ public class UserModel implements UserDetails {
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
-        return List.of(new SimpleGrantedAuthority("ROLE_" + this.role.name()));
+        // CORREÇÃO: Retorna a autoridade diretamente do enum.
+        // O método .name() do enum vai retornar a string "ROLE_ADMIN" ou "ROLE_USER".
+        return List.of(new SimpleGrantedAuthority(this.role.name()));
     }
 
     @Override

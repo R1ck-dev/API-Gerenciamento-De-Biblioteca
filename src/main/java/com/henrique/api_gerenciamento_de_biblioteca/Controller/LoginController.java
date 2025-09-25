@@ -27,17 +27,14 @@ public class LoginController {
 
     @PostMapping("/login")
     public SectionDTO logar(@RequestBody LoginDTO login) {
-        // Busca o usuário e já trata o caso de "não encontrado"
         UserModel user = repository.findByEmail(login.getUsername())
                 .orElseThrow(() -> new RuntimeException("Usuário não encontrado: " + login.getUsername()));
 
-        // Se o usuário foi encontrado, verifica a senha
         boolean passwordOk = encoder.matches(login.getPassword(), user.getPassword());
         if (!passwordOk) {
             throw new RuntimeException("Senha inválida para o login: " + login.getUsername());
         }
 
-        // Se chegou aqui, o login é válido.
         SectionDTO sessao = new SectionDTO();
         sessao.setLogin(user.getUsername());
 
